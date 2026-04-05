@@ -68,7 +68,7 @@ const db = {
     },
     {
       id: 4,
-      image: "calca-jeans2.png",
+      image: "calca-jeans.png",
       title: "SKINNY FIT JEANS",
       starsReviewImage: "Stars3-5.png",
       review: 3.5,
@@ -118,7 +118,7 @@ const db = {
     },
     {
       id: 8,
-      image: "camisa-laranja2.png",
+      image: "camisa-laranja.png",
       title: "COURAGE GRAPHIC T-SHIRT",
       starsReviewImage: "Stars4.png",
       review: 4.0,
