@@ -20,13 +20,8 @@ const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(express.json());
 
-// ✅ STATIC CORRETO
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
 
 // ✅ FUNÇÃO DE URL
 const getImageUrl = (req, imageName) => {
@@ -163,9 +158,7 @@ const db = {
 
 app.get("/products", (req, res) => {
   const products = db.products.map((product) => ({
-    ...product,
-    image: getImageUrl(req, product.image),
-    starsReviewImage: getImageUrl(req, product.starsReviewImage),
+    ...product
   }));
 
   res.json(products);
@@ -182,11 +175,27 @@ app.get("/products/:id", (req, res) => {
 
   const formattedProduct = {
     ...product,
-    image: getImageUrl(req, product.image),
-    starsReviewImage: getImageUrl(req, product.starsReviewImage),
   };
 
   res.json(formattedProduct);
+});
+
+app.get("/products/:id/image", (req, res) => {
+  const { id } = req.params;
+
+  const product = db.products.find((p) => p.id === parseInt(id));
+
+  if (!product) {
+    return res.status(404).json({ error: "Product not found" });
+  }
+
+  const imagePath = path.join(
+    __dirname,
+    "public/images",
+    product.image
+  );
+
+  res.sendFile(imagePath);
 });
 
 // ================= START =================
