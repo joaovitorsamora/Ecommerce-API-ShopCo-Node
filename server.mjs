@@ -81,7 +81,7 @@ const db = {
     },
     {
       id: 5,
-      image: "camisa-xadrez.png",
+      image: "camisa-xadreza.png",
       title: "CHECKERED SHIRT",
       starsReviewImage: "Stars4-5.png",
       review: 4.5,
